@@ -42,27 +42,29 @@ export default async function Home() {
   return (
     <div className="p-4 space-y-4 text-center">
       <h1 className="font-light text-2xl">Punkte (Gruppenphase)</h1>
-
-      {groups?.map((groupId, i) => (
-        <div key={groupId}>
-          <div className="text-xl p-4">
-            Gruppe {String.fromCharCode(65 + i)}
+      <div className="space-y-4">
+        {groups?.length === 0 && "Warte, bis das Turnier beginnt!"}
+        {groups?.map((groupId, i) => (
+          <div key={groupId}>
+            <div className="text-xl p-4">
+              Gruppe {String.fromCharCode(65 + i)}
+            </div>
+            <div className="space-y-4">
+              {participants
+                ?.filter((el) => el.participant.group_id == groupId)
+                .map((part) => (
+                  <div
+                    key={part.participant.id}
+                    className="p-2 bg-accent rounded-md drop-shadow-md flex flex-col gap-2"
+                  >
+                    <p>{part.participant.name}</p>
+                    <p className="text-2xl">{part.participant.score}</p>
+                  </div>
+                ))}
+            </div>
           </div>
-          <div className="space-y-4">
-            {participants
-              ?.filter((el) => el.participant.group_id == groupId)
-              .map((part) => (
-                <div
-                  key={part.participant.id}
-                  className="p-2 bg-accent rounded-md drop-shadow-md flex flex-col gap-2"
-                >
-                  <p>{part.participant.name}</p>
-                  <p className="text-2xl">{part.participant.score}</p>
-                </div>
-              ))}
-          </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 }

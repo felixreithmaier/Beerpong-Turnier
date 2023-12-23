@@ -8,6 +8,8 @@ export default async function Home() {
     <div className="p-4 space-y-4 text-center">
       <h1 className="font-light text-2xl">Finalspiele</h1>
       <div className="space-y-4">
+        {games?.filter((e) => !e.match.group_id).length === 0 &&
+          "Warte, bis die Finalspiele beginnen!"}
         {games
           ?.filter((e) => !e.match.group_id)
           .map((game, i) => (
