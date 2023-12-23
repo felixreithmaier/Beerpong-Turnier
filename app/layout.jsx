@@ -2,6 +2,7 @@ import { Inter } from "next/font/google";
 import {
   GrBarChart,
   GrBladesVertical,
+  GrList,
   GrSchedulePlay,
   GrTrophy,
 } from "react-icons/gr";
@@ -26,13 +27,16 @@ export default function RootLayout({ children }) {
         </main>
         <div className="fixed bottom-8 inset-x-8 bg-white  flex justify-around rounded-full items-center h-16 drop-shadow-2xl">
           <Link href="/">
-            <GrBladesVertical size={32} color="#B03B54" />
+            <GrBladesVertical size={28} color="#B03B54" />
           </Link>
           <Link href="/finals">
-            <GrTrophy size={32} color="#B03B54" />
+            <GrTrophy size={28} color="#B03B54" />
           </Link>
           <Link href="/stats">
-            <GrBarChart size={32} color="#B03B54" />
+            <GrBarChart size={28} color="#B03B54" />
+          </Link>
+          <Link href="/rules">
+            <GrList size={28} color="#B03B54" />
           </Link>
         </div>
       </body>
