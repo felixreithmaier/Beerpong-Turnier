@@ -1,0 +1,43 @@
+on:
+    push:
+      branches: ['main']
+    workflow_dispatch:
+  
+  env:
+    AZURE_WEBAPP_NAME: beerpong
+    NODE_VERSION: '18.x'
+    AZURE_WEBAPP_SECRET: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+  
+  permissions:
+    contents: read
+  
+  jobs:
+    deploy:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout Action
+          uses: actions/checkout@v3
+  
+        - name: Set up Node.js
+          uses: actions/setup-node@v3
+          with:
+            node-version: ${{ env.NODE_VERSION }}
+            cache: 'npm'
+  
+        - name: npm install, build, and test
+          run: |
+            npm install
+            npm run build --if-present
+            npm run test --if-present
+  
+        - name: move static files into standalone
+          run: |
+            cp -R "dist/static" "./dist/standalone/dist/static"
+  
+        - name: deploy standalone folder to Azure WebApp
+          id: deploy-to-webapp
+          uses: azure/webapps-deploy@v2
+          with:
+            app-name: ${{ env.AZURE_WEBAPP_NAME }}
+            publish-profile: ${{ env.AZURE_WEBAPP_SECRET }}
+            package: dist/standalone
