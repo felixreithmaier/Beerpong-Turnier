@@ -43,7 +43,9 @@ export default async function Home() {
                       <p key={i}>{i === 1 ? "(" + el : el}</p>
                     ))}
                 </div>
-                <div className="basis-2/12">{game.match.scores_csv || "-"}</div>
+                <div className="basis-2/12 text-xl">
+                  {game.match.scores_csv || "-"}
+                </div>
                 <div className="basis-5/12">
                   {participants
                     ?.find(

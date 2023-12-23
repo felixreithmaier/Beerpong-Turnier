@@ -44,8 +44,8 @@ export default async function Home() {
       <h1 className="font-light text-2xl">Punkte (Gruppenphase)</h1>
 
       {groups?.map((groupId, i) => (
-        <>
-          <div key={groupId} className="text-xl pt-4">
+        <div key={groupId}>
+          <div className="text-xl p-4">
             Gruppe {String.fromCharCode(65 + i)}
           </div>
           <div className="space-y-4">
@@ -61,7 +61,7 @@ export default async function Home() {
                 </div>
               ))}
           </div>
-        </>
+        </div>
       ))}
     </div>
   );
